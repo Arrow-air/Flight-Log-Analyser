@@ -23,14 +23,6 @@ The **Flight Log Analyzer** is a web-based application designed to upload, proce
 - **Responsive Interface**: Built with Bootstrap 5.3 for a clean, mobile-friendly experience.
 - **Markdown Rendering**: Displays flight test documentation with support for fenced code blocks and tables.
 
-## Screenshots
-
-*Upload Page*
-![Upload Page](screenshots/upload_page.png)
-
-*Results Page with Attitude Plot*
-![Results Page](screenshots/results_attitude.png)
-
 ## Installation
 
 ### Prerequisites
