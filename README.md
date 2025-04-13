@@ -131,7 +131,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For issues or questions, open an issue on this repository or contact [your-email@example.com].
+For issues or questions, open an issue on this repository or contact [info@panrobotics.xyz].
 
 ---
 
