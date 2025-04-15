@@ -1,0 +1,6 @@
+flask==2.0.1
+pymavlink==2.4.30
+matplotlib==3.5.2
+authlib==1.0.1
+flask-login==0.5.0
+python-dotenv==0.20.0
