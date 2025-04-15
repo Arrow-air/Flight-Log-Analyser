@@ -72,6 +72,11 @@ The **Flight Log Analyzer** is a web-based application designed to upload, proce
    Obtain `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` by registering an OAuth application on GitHub:
    - Go to GitHub > Settings > Developer settings > OAuth Apps > New OAuth App.
    - Set the callback URL to `http://localhost:5000/authorize` for local development.
+   
+  Obtain `FLASK_SECRET_KEY` via the terminal by:
+  ```bash
+  head -c32 /dev/urandom | xxd -p -c32
+  ```
 
 5. **Initialize the Database**:
    The application automatically creates a SQLite database (`users.db`) on first run.
