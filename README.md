@@ -53,12 +53,16 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
 
    Example `requirements.txt`:
    ```
-   flask==2.0.1
-   pymavlink==2.4.30
+   pymavlink==2.4.31
    matplotlib==3.5.2
    authlib==1.0.1
    flask-login==0.5.0
    python-dotenv==0.20.0
+   Flask==1.1.2
+   Werkzeug==1.0.1
+   Jinja2==3.0.3
+   itsdangerous==1.1.0
+   pymavlink==2.4.31
    ```
 
 4. **Set Up Environment Variables**:
@@ -72,6 +76,7 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
    Obtain `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` by registering an OAuth application on GitHub:
    - Go to GitHub > Settings > Developer settings > OAuth Apps > New OAuth App.
    - Set the callback URL to `http://localhost:5000/authorize` for local development.
+   - Set the Homepage URL to `https://www.arrowair.com` for local development.(doesn't really matter)
    
   Obtain `FLASK_SECRET_KEY` via the terminal by:
   ```bash
