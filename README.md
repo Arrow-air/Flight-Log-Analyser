@@ -53,16 +53,17 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
 
    Example `requirements.txt`:
    ```
-   pymavlink==2.4.31
-   matplotlib==3.5.2
-   authlib==1.0.1
-   flask-login==0.5.0
-   python-dotenv==0.20.0
-   Flask==1.1.2
-   Werkzeug==1.0.1
-   Jinja2==3.0.3
-   itsdangerous==1.1.0
-   pymavlink==2.4.31
+    matplotlib==3.5.2
+    authlib==1.0.1
+    flask-login==0.5.0
+    python-dotenv==0.20.0
+    flask==1.1.2
+    werkzeug==1.0.1
+    Jjinja2==3.0.3
+    itsdangerous==1.1.0
+    pymavlink==2.4.31
+    markdown==3.8
+    requests==3.32.3
    ```
 
 4. **Set Up Environment Variables**:
@@ -92,6 +93,10 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
    ```
 
    The app will be available at `http://localhost:5000`.
+   
+   - if Port 5000 was already in use on your machine. it can be changed it to say 5050 in the main python code
+   
+   so The app will be available at `http://localhost:5050`.
 
 ## Usage
 
