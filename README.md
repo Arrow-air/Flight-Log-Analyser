@@ -36,7 +36,7 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/alexdada555/Flight-Log-Analyser.git
+   git clone https://github.com/Pan-Robotics/Flight-Log-Analyser.git
    cd Flight-Log-Analyser
    ```
 
