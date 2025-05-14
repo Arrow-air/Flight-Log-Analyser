@@ -93,7 +93,15 @@ def get_time_from_msg(msg):
     return None
 
 def parse_log(logfile):
-    mav = mavutil.mavlink_connection(logfile, robust_parsing=True, dialect='ardupilotmega')
+    # Check file extension to determine parsing method
+    if logfile.endswith('.BIN'):
+        mav = mavutil.mavlink_connection(logfile, robust_parsing=True, dialect='ardupilotmega')
+    elif logfile.endswith('.log'):
+        mav = mavutil.mavlink_connection(logfile, robust_parsing=True, dialect='ardupilotmega')  # Adjust if needed for .log files
+    else:
+        raise ValueError("Unsupported file format")
+    
+    # Initialize data structures
     attitude_data = {'Time': [], 'Roll': [], 'Pitch': [], 'Yaw': [], 'DesRoll': [], 'DesPitch': [], 'DesYaw': []}
     RATE_data = {'Time': [], 'R': [], 'P': [], 'Y': [], 'RDes': [], 'PDes': [], 'YDes': []}
     altitude_data = {'Time0': [], 'Time1': [], 'Alt0': [], 'Alt1': []}
@@ -105,6 +113,7 @@ def parse_log(logfile):
     RCOU_data = {'Time': [], 'C1': [], 'C2': [], 'C3': [], 'C4': []}
     XKF4_data = {'Time': [], 'SV': [], 'SP': [], 'SH': [], 'SM': [], 'SVT': []}
 
+    # Parse the log file
     while True:
         msg = mav.recv_match(blocking=True)
         if msg is None:
@@ -400,7 +409,40 @@ def generate_plots(attitude_data, RATE_data, altitude_data, ESC_data, BAT_data, 
         plt.close()
 
     return plot_files
+def anonymize_gps_log(input_path, output_path):
+    with open(input_path, 'r') as f:
+        lines = f.readlines()
 
+    output_lines = []
+
+    # Confirmed field index mapping from your log
+    field_indices = {
+        "GPS":   {"Lat": 7, "Lng": 8, "Alt": 9},
+        "AHR2":  {"Lat": 6, "Lng": 7},
+        "EAHR":  {"Lat": 5, "Lng": 6},  # assumed
+        "POS":   {"Lat": 2, "Lng": 3},  # ✅ corrected
+        "TERR":  {"Lat": 3, "Lng": 4},  # ✅ corrected
+        "ORGN":  {"Lat": 3, "Lng": 4}
+    }
+
+    for line in lines:
+        line_stripped = line.strip()
+        for msg_type, fields in field_indices.items():
+            if line_stripped.startswith(msg_type):
+                parts = line_stripped.split(',')
+                try:
+                    for field_name, index in fields.items():
+                        if len(parts) > index:
+                            parts[index] = "0"
+                    line = ','.join(parts) + '\n'
+                except IndexError:
+                    pass
+                break  # don't process the same line more than once
+        output_lines.append(line)
+
+    with open(output_path, 'w') as f:
+        f.writelines(output_lines)
+    
 # Routes
 @app.route('/login')
 def login():
@@ -458,15 +500,23 @@ def upload_file():
     if request.method == 'POST':
         uploaded_files = {'log': None, 'markdown': None, 'videos': []}
         markdown_content = None
+        anonymized_file_path = None
 
         # Step 1: Handle log file
         if 'file' in request.files:
             log_file = request.files['file']
-            if log_file.filename.endswith('.BIN'):
+            if log_file.filename.endswith(('.BIN', '.log')):  # Accept both .BIN and .log files
                 log_filepath = os.path.join(app.config['UPLOAD_FOLDER'], f"{current_user.id}_{log_file.filename}")
                 log_file.save(log_filepath)
                 uploaded_files['log'] = log_filepath
                 progress_tracker['progress'] += 1  # Increment progress
+
+                # Anonymize the log file if requested
+                if 'anonymize' in request.form and log_file.filename.endswith('.log'):
+                    output_file_name = request.form.get('output_file_name', 'anonymized.log')
+                    anonymized_file_path = os.path.join(app.config['UPLOAD_FOLDER'], output_file_name)
+                    anonymize_gps_log(log_filepath, anonymized_file_path)
+                    uploaded_files['log'] = anonymized_file_path  # Replace with anonymized file
 
         # Step 2: Handle markdown file
         if 'markdown' in request.files:

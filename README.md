@@ -2,13 +2,13 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![Flask](https://img.shields.io/badge/Flask-2.0%2B-green) ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-blueviolet) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-The **Flight Log Analyser** is a web-based application designed to upload, process, and visualize Ardupilot flight logs (`.BIN` files), along with associated flight test documentation (Markdown `.md` files) and videos. Built with Flask, it provides an intuitive interface for drone enthusiasts and engineers to analyze flight performance metrics such as attitude, rate, altitude, ESC (Electronic Speed Controller) data, and battery status. The application supports GitHub OAuth for secure user authentication and stores session data in a SQLite database.
+The **Flight Log Analyser** is a web-based application designed to upload, process, and visualize Ardupilot flight logs (`.BIN`,`.log` files), along with associated flight test documentation (Markdown `.md` files) and videos. Built with Flask, it provides an intuitive interface for drone enthusiasts and engineers to analyze flight performance metrics such as attitude, rate, altitude, ESC (Electronic Speed Controller) data, and battery status. The application supports GitHub OAuth for secure user authentication and stores session data in a SQLite database.
 
 ## Features
 
 - **Secure Authentication**: Login via GitHub OAuth to ensure secure access to your flight data.
 - **File Uploads**:
-  - Upload Ardupilot `.BIN` log files for flight data analysis.
+  - Upload Ardupilot `.BIN` or `.log` log files for flight data analysis.
   - Upload Markdown (`.md`) files to document flight test processes.
   - Upload multiple video files to associate with flight sessions.
 - **Flight Data Visualization**: Automatically generates plots for:
@@ -102,7 +102,7 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
 
 1. **Login**: Access the app and log in using your GitHub account.
 2. **Upload Files**:
-   - Select an Ardupilot `.BIN` log file.
+   - Select an Ardupilot `.BIN` or `.log` log file.
    - Optionally upload a Markdown `.md` file for test documentation.
    - Optionally upload one or more video files.
 3. **Monitor Progress**: A progress bar tracks file uploads and processing.
@@ -112,6 +112,7 @@ The **Flight Log Analyser** is a web-based application designed to upload, proce
    - Access uploaded videos via links in the "Videos" tab.
 5. **Manage Sessions**: Revisit past sessions from the upload page to view previously analyzed data.
 6. **Logout**: Securely log out when done.
+7. **Anonymize**: choose whether or not to generate a `.log` file with GPS tracking data and output a new `.log` file.
 
 ## Project Structure
 

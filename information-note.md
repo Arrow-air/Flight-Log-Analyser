@@ -4,7 +4,7 @@
 
 # Project Description
 
-The **Flight Log Analyser** is a web-based application designed to facilitate the upload, processing, and visualization of Ardupilot flight logs (`.BIN` files), along with associated flight test documentation (Markdown `.md` files) and videos. Built using Flask, the application offers an intuitive interface for drone enthusiasts and engineers to analyze flight performance metrics such as attitude, rate, altitude, Electronic Speed Controller (ESC) data, and battery status. It supports GitHub OAuth for secure user authentication and utilizes a SQLite database to store session data.
+The **Flight Log Analyser** is a web-based application designed to facilitate the upload, processing, and visualization of Ardupilot flight logs (`.BIN`,`.log` files), along with associated flight test documentation (Markdown `.md` files) and videos. Built using Flask, the application offers an intuitive interface for drone enthusiasts and engineers to analyze flight performance metrics such as attitude, rate, altitude, Electronic Speed Controller (ESC) data, and battery status. It supports GitHub OAuth for secure user authentication and utilizes a SQLite database to store session data.
 [Github Repo](https://github.com/Pan-Robotics/Flight-Log-Analyser/)
 
 # Methodology
@@ -12,7 +12,7 @@ The **Flight Log Analyser** is a web-based application designed to facilitate th
 The application is developed in Python using the Flask framework for web development. It incorporates Bootstrap for responsive UI design. The system allows users to:
 
 - Authenticate securely via GitHub OAuth.
-- Upload Ardupilot `.BIN` log files for flight data analysis.
+- Upload Ardupilot `.BIN` or `.log` log files for flight data analysis.
 - Upload Markdown (`.md`) files to document flight test processes.
 - Upload multiple video files to associate with flight logs.
 
